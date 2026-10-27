@@ -60,7 +60,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: latest
         run: |
-          docker build --build-arg NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+          docker build --pull --build-arg NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
